@@ -6,7 +6,7 @@ var findOrCreate = require('mongoose-findorcreate');
 var userSchema = mongoose.Schema({
 	"name" : { type: String },
 	"id" : { type: String },
-	"access_token" : { type: String }
+	"access_token" : { type: String } 
 });
 
 userSchema.plugin(findOrCreate);
