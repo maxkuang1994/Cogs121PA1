@@ -122,6 +122,7 @@ app.get('/login', function(req, res){
 
 app.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', {user: req.user});
+  
 });
 
 app.get('/photos', ensureAuthenticated, function(req, res){
