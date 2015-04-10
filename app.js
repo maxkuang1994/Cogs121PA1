@@ -69,7 +69,7 @@ passport.use(new InstagramStrategy({
       
       // created will be true here
       models.User.findOrCreate({}, function(err, user, created) {
-        // created will be false here
+        // created will be false here 
         process.nextTick(function () {
           // To keep the example simple, the user's Instagram profile is returned to
           // represent the logged-in user.  In a typical application, you would want
