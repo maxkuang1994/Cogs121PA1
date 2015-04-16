@@ -1,33 +1,30 @@
-      
 
-  <header style="background:#31B88A">
-        <div class="container">
-            <div class="intro-text">
-                <div class="intro-heading">HELLO {{first_name}}</div>
-                <div class="intro-lead-in">
+<header style="background:#31B88A">
+   <div class="container">
+      <div class="intro-text">
+         <div class="intro-heading">HELLO FACEBOOK WALL {{first_name}}</div>
+         <div class="intro-lead-in">
 
-                  <p>Learn more about happiness</p></div>
+            <p></p>
+         </div>
 
- <div id="wrapper1" >
-      <div id="columns1">
-                 {{#each facebook}}
+         <div id="wrapper1">
+            <div id="columns1">
+               {{#each facebook}}
 
-       <div class="pin1">
+               <div class="pin1">
 
-<p>{{message}}</p> 
- <p></p> 
+                  <p>{{message}}</p>
+                  <p>{{totalLikes}} likes</p>
 
-
-
-  <!-- <button class="btn btn-success" onclick={{liked}} type="button">Like</button> -->
-   </div>
-{{/each}}
-</div></div>
-
-              
-                </div>
-               
+               </div>
+               {{/each}}
             </div>
-        </div>
-    </header>
+         </div>
 
+
+      </div>
+
+   </div>
+   </div>
+</header>

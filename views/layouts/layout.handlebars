@@ -64,11 +64,11 @@
                         <li class="dropdown">
                            <a class="dropdown-toggle btn-info" data-toggle="dropdown" role="button" aria-expanded="false">
                             <img src={{user_profilePicture}} alt="user profile picture" style="width:30px;  vertical-align: text-center;"></img>
-                              {{user.username}} <span class="caret"></span>
+                              {{user.displayName}} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu " role="menu">
-                               <li><a href="/photos2"  style="color:#000">Profile</a></li>
+                               <li><a href={{user.provider}}  style="color:#000">Profile</a></li>
                                <li><a href="/account"  style="color:#000">Account</a></li>
                               <li><a href="/logout"  style="color:#000">Logout</a></li>
                             </ul>
