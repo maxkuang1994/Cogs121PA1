@@ -1,7 +1,7 @@
 {
-  "name": "mywebapp",
+  "name": "HANA HAPPINESS",
   "version": "0.0.1",
-  "author": "Alex Yang, Brian Soe, Purvi Desai",
+  "author": "Ou Yang,Wen Jia; Kuang, Haoran",
   "description": "Assignment 1 for COGS 121",
   "scripts": {
     "start": "node app.js"

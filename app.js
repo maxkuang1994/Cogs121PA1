@@ -15,8 +15,10 @@ var Instagram = require('instagram-node-lib');
 var graph = require('fbgraph');
 var mongoose = require('mongoose');
 var app = express();
+var brokenMusicLink ='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/417197_10149999285992991_711134825_n.png?oh=5f504d85a96f2380b2e321d724d15511&oe=55DC0D22&__gda__=1435991238_9b0901b9ebd35182a3dccd793d453e0b';
 //local dependencies
 var models = require('./models');
+
 //client id and client secret here, taken from .env
 dotenv.load();
 var INSTAGRAM_CLIENT_ID = process.env.INSTAGRAM_CLIENT_ID;
@@ -169,7 +171,7 @@ app.get('/login', function(req, res) {
             user: req.user,
             onepicture: onepicture
          });
-      if (req.user.provider == 'instagram') {
+      if (req.user.provider == 'instagram' && (req.user != null)) {
          var query = models.User.where({
             name: req.user.username
          });
@@ -194,7 +196,7 @@ app.get('/login', function(req, res) {
          });
       } //if ends 
 
-      if (req.user.provider === 'facebook') {
+      if (req.user.provider === 'facebook' && (req.user != null)) {
          graph.get("/me?fields=picture.type(large)", /*'/me?fields=id,name,picture,friends'*/ function(err, res2) {
             res.render('login', {
                user: req.user,
@@ -252,45 +254,58 @@ app.get('/account', ensureAuthenticated, function(req, res) {
 });
 
 app.get('/facebook', ensureAuthenticated, function(req, res) {
-   graph.get("/me?fields=picture.type(large)", /*'/me?fields=id,name,picture,friends'*/ function(err, res2) {
+   graph.get("/me?fields=picture.type(large),photos,first_name", /*'/me?fields=id,name,picture,friends'*/ function(err, res2) {
       var user_profilePicture = res2.picture.data.url;
+      var first_name = res2.first_name;
+      
+      var userPhotos=[];
 
-      //graph.get("/me/posts?fields=likes", /*'/me?fields=id,name,picture,friends'*/ function(err,res2) {
-      //console.log(res2);
-      //});
-      graph.get("/me/statuses", /*'/me?fields=id,name,picture,friends'*/ function(err, res1) {
+      if(res2.photos!=null)
+      for(var i5=0;i5<res2.photos.data.length;i5++){
+      if(res2.photos.data[i5] == null){
+      userPhotos.push(
+      {
+         photourl:res2.photos.data[i5].images[1].source,
+                  photoLink:res2.photos.data[i5].link,
+                  photoLikes:0,
+      });
+      }
+      else{
+      userPhotos.push(
+      {
+         photourl:res2.photos.data[i5].images[1].source,
+         photoLink:res2.photos.data[i5].link,
+         photoLikes:res2.photos.data[i5].likes.data.length
+      });
+     }
+}
+      graph.get("/me/statuses", function(err, res1) {
 
          var res1 = res1;
          var messageArr = [];
-          console.log("the le" +res1.data[1].likes.data.length);
+         
          for (var i = 0; i < res1.data.length; i++) {
-                   console.log(i+" out"+res1.data[i]);
+           
+             if(res1.data[i].likes == null){
             messageArr.push({
-               message: res1.data[i].message,
-                totalLikes: function(){
-                    i=0;
-                    console.log("the length"+res1.data.length);
-                    var a = 0;
-                    console.log(i);
-                    console.log(i+" "+res1.data[i]);
-                      i++;
-                    if(res1.data[i] != null)
-                       a = res1.data[i].likes.data.length; 
-                      
-                     return a;
-                    
-                } ,
-            })
-                console.log(i+" out2222"+res1.data[i]);
-                // console.log("the le" +res1.data[i].likes.data.length);
-         };
+                message: res1.data[i].message,
+               totalLikes:0,
+            });
+             }
+             else{
+            messageArr.push({
+                message: res1.data[i].message,
+               totalLikes:res1.data[i].likes.data.length 
+            });}//else
+            }//for
 
-         //console.log(res2.data[0].story);
          res.render('facebook', {
+           
             user: req.user,
             res1: res1,
             facebook: messageArr,
-            user_profilePicture: user_profilePicture /*, first_name:res1.first_name*/
+            userPhotos:userPhotos,
+            user_profilePicture: user_profilePicture,first_name:first_name
          });
       });
    }); //graph outer
@@ -300,7 +315,7 @@ app.get('/facebook', ensureAuthenticated, function(req, res) {
 
 app.get('/love', function(req, res) {
    graph.setAccessToken('1037035612991295|Evyk6CopDTyeNmuey1VCGiWMnDc');
-   graph.get("search?q=beach+san_diego&type=place&center=32.7150,-117.1625&distance=20000&limit=100", function(err, res2) {
+   graph.get("search?q=beach+san_diego&type=page&center=32.7150,-117.1625&distance=50000&limit=100000", function(err, res2) {
 
          var location = [];
 
@@ -309,21 +324,26 @@ app.get('/love', function(req, res) {
                url: res2.data[i].id,
             })
          };
-         //console.log("the location is "+location);
+
          var locationINFO = [];
-         var locationINFO2 = [];
-
-
+   
+var i3=0;
+        
          for (var i2 = 0; i2 < location.length; i2++) {
 
    
-            graph.get("/" + location[i2].url + "?fields=description,checkins,likes,were_here_count,name,picture.type(large),link", function(err, res3) {
-                  var locationPicurl = " ";
-                  if (res3.picture.data.url != "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/y-/r/qXbA9JmRIZi.png")
+            graph.get("/" + location[i2].url + "?fields=description,checkins,likes,were_here_count,name,picture.type(large).width(600),link", function(err, res3) {
+                  var locationPicurl;
+var a ="false";
 
+           if ((res3.picture.data.width >= 400)&&(res3.picture.data.url!=brokenMusicLink)&&(res3.picture.data.url!='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/418333_10149999285994467_1920585607_n.png?oh=7d32e7fdad9c6cf1b0333b05245feb91&oe=55D6492D&__gda__=1437280202_44cc3d9bbdc89cc4cc03a2ba3548da54')&&(res3.picture.data.url!='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/v/t1.0-1/580798_10149999285995853_2130804811_n.png?oh=9d7c86b0f9b8d44f5140c79d8aa42b58&oe=5598A65F&__gda__=1436073212_5d1ecfb4933036d57c1f4e9a36983d60')&&(res3.picture.data.url != 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/418333_10149999285994467_1920585607_n.png?oh=56f79c7d99c8953b1d3d458b592706d6&oe=55AEBC2D&__gda__=1437280202_85508750ff88cded83a455f528cf0a18'))
+                     {
                      locationPicurl = res3.picture.data.url;
-
-                  locationINFO.push({
+                 i3++;
+                   a ="true";       
+                   }
+                if (a == "true") 
+                  var b =locationINFO.push({
                      locationurl: res3.link,
                      locationDescription: res3.description,
                      locationCheckins: res3.checkins,
@@ -331,11 +351,20 @@ app.get('/love', function(req, res) {
                      locationWereHere: res3.were_here_count,
                      locationName: res3.name,
                      locationPic: locationPicurl
-                  })
-
-                  for (var k = 0; k < locationINFO.length; k++) {
-                  }
-                  if (k == location.length - 1) {
+                  }); 
+                   i2--;
+                  if (i2==1) {
+                       locationInFO = locationINFO.sort(
+                           function(a, b){
+                          var keyA = a.locationWereHere,
+                          keyB = b.locationWereHere;
+                            // Compare the 2 dates
+                               if(keyA < keyB) return 1;
+                              if(keyA > keyB) return -1;
+                                     return 0;
+                             }
+                        );
+                      
                      arr(locationINFO);
                      return;
                   }
@@ -357,7 +386,6 @@ app.get('/love', function(req, res) {
 
 app.get('/popular', function(req, res) {
    Instagram.media.popular({
-      cout: 4,
       complete: function(data) {
          //Map will iterate through the returned data obj
          var onepicture = data[1].images.low_resolution.url;
@@ -411,12 +439,6 @@ app.get('/instagram', ensureAuthenticated, function(req, res) {
                   return tempJSON;
                });
 
-               /* Liking requires permission
-                 var mediaLike = data.map(function(item){
-                   console.log("Enter mediaLike, before returning");
-                 return Instagram.media.likes({media_id:item.id, access_token:user.access_token});
-                   }); 
-                 */
                Instagram.users.info({
                   user_id: user.id,
                   access_token: user.access_token,
@@ -437,22 +459,14 @@ app.get('/instagram', ensureAuthenticated, function(req, res) {
 });
 
 
-// GET /auth/instagram
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  The first step in Instagram authentication will involve
-//   redirecting the user to instagram.com.  After authorization, Instagram
-//   will redirect the user back to this application at /auth/instagram/callback
 app.get('/auth/instagram',
    passport.authenticate('instagram'),
    function(req, res) {
-      // The request will be redirected to Instagram for authentication, so this
-      // function will not be called.
    });
 
 app.get('/auth/facebook',
    function(req, res) {
-      // we don't have a code yet
-      // so we'll redirect to the oauth dialog
+
       if (!req.query.code) {
          var authUrl = graph.getOauthUrl({
             "client_id": conf.client_id,
@@ -479,11 +493,7 @@ app.get('/auth/facebook',
 
    });
 
-// GET /auth/instagram/callback
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function function will be called,
-//   which, in this example, will redirect the user to the home page.
+
 app.get('/auth/instagram/callback',
    passport.authenticate('instagram', {
       failureRedirect: '/login'

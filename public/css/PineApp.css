@@ -1,4 +1,9 @@
-﻿.blueResponsive{
+﻿
+.shadows:hover{
+opacity:0.8;
+
+}
+.blueResponsive{
   background-color: #00CC66;
     color:#FFFFFF;
 }
