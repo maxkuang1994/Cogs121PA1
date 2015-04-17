@@ -539,5 +539,8 @@ app.get('/logout', function(req, res) {
    res.redirect('/login');
 });
 
-http.createServer(app).listen(app.get('port'), function() {
-         console.log('Express server listening on port ' + app.get('port'));});
+
+http.createServer(app).listen("http://hanahappiness.herokuapp.com/", function() {
+         console.log('Express server listening on port ');}
+//http.createServer(app).listen(app.get('port'), function() {
+  //       console.log('Express server listening on port ' + app.get('port'));});
