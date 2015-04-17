@@ -95,6 +95,7 @@ passport.use(new FacebookStrategy({
    function(accessToken, refreshToken, profile, done) {
       // asynchronous verification, for effect...
       // created will be false here 
+      
       models.User.findOrCreate({
          "name": profile.username,
          "id": profile.id,
