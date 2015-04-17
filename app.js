@@ -260,7 +260,6 @@ app.get('/facebook', ensureAuthenticated, function(req, res) {
    if(req.user.provider != "facebook")   {res.redirect('/login');
    return;}
 
- /*
    graph.get("/me?fields=picture.type(large),photos,first_name", function(err, res2) {
       var user_profilePicture = res2.picture.data.url;
       var first_name = res2.first_name;
@@ -278,17 +277,32 @@ app.get('/facebook', ensureAuthenticated, function(req, res) {
       });
       }
       else{
-      userPhotos.push(
+     if(res2.photos.data[i5].likes!=null)
+      {userPhotos.push(
       {
          photourl:res2.photos.data[i5].images[1].source,
          photoLink:res2.photos.data[i5].link,
-         photoLikes:res2.photos.data[i5].likes.data.length
-      });
+  
+           photoLikes:res2.photos.data[i5].likes.data.length
+
+      });}
+      else
+      {userPhotos.push(
+      {
+         photourl:res2.photos.data[i5].images[1].source,
+         photoLink:res2.photos.data[i5].link,
+  
+           photoLikes:0
+
+      });}
+
+
+
+
      }
      }}
 
       graph.get("/me/statuses", function(err, res1) {
-
          var res1 = res1;
          var messageArr = [];
 
@@ -317,10 +331,8 @@ app.get('/facebook', ensureAuthenticated, function(req, res) {
             user_profilePicture: user_profilePicture,first_name:first_name
          });
       });
-   }); //graph outer
-*/
-res.render('facebook',{user:req.user});
 
+   }); //graph outer
 });
 
 
