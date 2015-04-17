@@ -260,7 +260,8 @@ app.get('/facebook', ensureAuthenticated, function(req, res) {
    if(req.user.provider != "facebook")   {res.redirect('/login');
    return;}
 
-   graph.get("/me?fields=picture.type(large),photos,first_name", /*'/me?fields=id,name,picture,friends'*/ function(err, res2) {
+ /*
+   graph.get("/me?fields=picture.type(large),photos,first_name", function(err, res2) {
       var user_profilePicture = res2.picture.data.url;
       var first_name = res2.first_name;
       
@@ -317,6 +318,9 @@ app.get('/facebook', ensureAuthenticated, function(req, res) {
          });
       });
    }); //graph outer
+*/
+res.render('facebook',{user:req.user});
+
 });
 
 
