@@ -41,7 +41,6 @@ var conf = {
    redirect_uri: 'http://hanahappiness.herokuapp.com/auth/facebook/callback'
 };
 
-
 //connect to database
 mongoose.connect(MONGODB_CONNECTION_URL);
 var db = mongoose.connection;
