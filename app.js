@@ -90,7 +90,7 @@ passport.use(new InstagramStrategy({
 passport.use(new FacebookStrategy({
       clientID: "1037035612991295",
       clientSecret: "a7f5db616a09e29c1433eb0877e1c216",
-      callbackURL: "http://localhost:3000/auth/facebook/callback"
+      callbackURL: "http://hanahappiness.herokuapp.com/auth/facebook/callback"
    },
    function(accessToken, refreshToken, profile, done) {
       // asynchronous verification, for effect...
