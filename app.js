@@ -106,7 +106,6 @@ passport.use(new FacebookStrategy({
          models.User.findOrCreate({}, function(err, user, created) {
 
             process.nextTick(function() {
-               graph.setAccessToken(accessToken);
                return done(null, profile);
             });
          })
