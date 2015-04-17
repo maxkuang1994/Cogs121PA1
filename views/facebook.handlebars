@@ -10,6 +10,7 @@
 <section style="background:rgb(40, 149, 216);">
          <div id="wrapper1">
             <div id="columns1">
+             {{#if res2Photos}}
               {{#each userPhotos}}
 
                  <div class="pin1" style="padding:10px">
@@ -20,7 +21,9 @@
                        <a class="btn-primary noTextDec">{{photoLikes}} Likes</a></div>
                  </div>
                {{/each}}
+            {{/if}}
 
+                {{#if facebookData}}
                {{#each facebook}}
 
                  <div class="pin1" style="padding:10px">
@@ -32,6 +35,8 @@
                    </div>
                  </div>
                {{/each}}
+              {{/if}}
+
             </div>
          </div>
 

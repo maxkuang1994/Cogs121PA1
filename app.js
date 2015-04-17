@@ -21,9 +21,12 @@ var models = require('./models');
 
 //client id and client secret here, taken from .env
 dotenv.load();
-var INSTAGRAM_CLIENT_ID = process.env.INSTAGRAM_CLIENT_ID;
-var INSTAGRAM_CLIENT_SECRET = process.env.INSTAGRAM_CLIENT_SECRET;
-var INSTAGRAM_CALLBACK_URL = process.env.INSTAGRAM_CALLBACK_URL;
+var INSTAGRAM_CLIENT_ID="68b395acd16f4d64921ba340b243eb22";
+var INSTAGRAM_CLIENT_SECRET="24fe9758adb745c9a81d252d467c2538";
+var INSTAGRAM_CALLBACK_URL="http://localhost:3000/auth/instagram/callback";
+
+var MONGODB_CONNECTION_URL  = "mongodb://Wendy_COGS:f4p_CM6S@ds061621.mongolab.com:61621/mydb";
+
 var INSTAGRAM_ACCESS_TOKEN = "";
 Instagram.set('client_id', INSTAGRAM_CLIENT_ID);
 Instagram.set('client_secret', INSTAGRAM_CLIENT_SECRET);
@@ -39,7 +42,7 @@ var conf = {
 
 
 //connect to database
-mongoose.connect('mongodb://localhost/tmp/data');
+mongoose.connect(MONGODB_CONNECTION_URL);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(callback) {
@@ -254,13 +257,16 @@ app.get('/account', ensureAuthenticated, function(req, res) {
 });
 
 app.get('/facebook', ensureAuthenticated, function(req, res) {
+   if(req.user.provider != "facebook")   {res.redirect('/login');
+   return;}
+
    graph.get("/me?fields=picture.type(large),photos,first_name", /*'/me?fields=id,name,picture,friends'*/ function(err, res2) {
       var user_profilePicture = res2.picture.data.url;
       var first_name = res2.first_name;
       
       var userPhotos=[];
-
-      if(res2.photos!=null)
+  
+      if(res2.photos!=null){
       for(var i5=0;i5<res2.photos.data.length;i5++){
       if(res2.photos.data[i5] == null){
       userPhotos.push(
@@ -278,14 +284,15 @@ app.get('/facebook', ensureAuthenticated, function(req, res) {
          photoLikes:res2.photos.data[i5].likes.data.length
       });
      }
-}
+     }}
+
       graph.get("/me/statuses", function(err, res1) {
 
          var res1 = res1;
          var messageArr = [];
-         
+
+         if(res1.data.length>0){
          for (var i = 0; i < res1.data.length; i++) {
-           
              if(res1.data[i].likes == null){
             messageArr.push({
                 message: res1.data[i].message,
@@ -297,13 +304,14 @@ app.get('/facebook', ensureAuthenticated, function(req, res) {
                 message: res1.data[i].message,
                totalLikes:res1.data[i].likes.data.length 
             });}//else
-            }//for
+         }}//if ends
 
          res.render('facebook', {
-           
+           res2Photos: res2.photos,
             user: req.user,
             res1: res1,
             facebook: messageArr,
+            facebookData:res1.data[0],
             userPhotos:userPhotos,
             user_profilePicture: user_profilePicture,first_name:first_name
          });
@@ -385,6 +393,7 @@ var a ="false";
 
 
 app.get('/popular', function(req, res) {
+
    Instagram.media.popular({
       complete: function(data) {
          //Map will iterate through the returned data obj
@@ -411,6 +420,10 @@ app.get('/popular', function(req, res) {
 
 
 app.get('/instagram', ensureAuthenticated, function(req, res) {
+      if(req.user.provider != "instagram")   
+         {res.redirect('/login');
+         return;
+      }
    var query = models.User.where({
       name: req.user.username
    });
@@ -425,29 +438,40 @@ app.get('/instagram', ensureAuthenticated, function(req, res) {
             count: 200,
             // user_id:req.user.id,
             complete: function(data) {
+            
                //Map will iterate through the returned data obj
+         
+               
+               if(data[0]!=null){
                var imageArr = data.map(function(item) {
                   //create temporary json object
                   tempJSON = [];
                   tempJSON.url2 = item.images.low_resolution.url;
-                  tempJSON.pp = item.caption.text; //BY ME
-                  tempJSON.totallikes = item.likes.data.username;
+                  if(item.caption!=null)
+                  tempJSON.pp = item.caption.text;
+                  else
+                       tempJSON.pp = " ";
 
                   tempJSON.the_profilePicture = item.user.profile_picture;
-                  tempJSON.mediaID = item.id;
+            
+                  if(item.likes!=null)
                   tempJSON.numLikes = item.likes.count;
+                   else
+                       tempJSON.numLikes = 0;
                   return tempJSON;
                });
+               }
 
                Instagram.users.info({
                   user_id: user.id,
                   access_token: user.access_token,
-                  complete: function(data) {
-                     user_profilePicture = data.profile_picture;
+                  complete: function(data2) {
+                     user_profilePicture = data2.profile_picture;
                      res.render('instagram', {
                         photos2: imageArr,
                         user: req.user,
-                        user_profilePicture: user_profilePicture
+                        user_profilePicture: user_profilePicture,
+                        data:data[0]
                      });
                   }
                });
