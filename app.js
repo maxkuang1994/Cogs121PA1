@@ -35,12 +35,11 @@ var FACEBOOK_APP_ID = "1037035612991295";
 var FACEBOOK_APP_SECRET = "a7f5db616a09e29c1433eb0877e1c216";
 var conf = {
    client_id: '1037035612991295',
-   
+
    client_secret: 'a7f5db616a09e29c1433eb0877e1c216',
    scope: 'public_profile, user_friends,user_likes,user_status, user_posts,user_photos,user_about_me',
    redirect_uri: 'http://hanahappiness.herokuapp.com/auth/facebook/callback'
 };
-
 
 //connect to database
 mongoose.connect(MONGODB_CONNECTION_URL);
