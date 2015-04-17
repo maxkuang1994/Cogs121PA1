@@ -23,7 +23,7 @@ var models = require('./models');
 dotenv.load();
 var INSTAGRAM_CLIENT_ID="68b395acd16f4d64921ba340b243eb22";
 var INSTAGRAM_CLIENT_SECRET="24fe9758adb745c9a81d252d467c2538";
-var INSTAGRAM_CALLBACK_URL="http://localhost:3000/auth/instagram/callback";
+var INSTAGRAM_CALLBACK_URL="http://hanahappiness.herokuapp.com/auth/instagram/callback";
 
 var MONGODB_CONNECTION_URL  = "mongodb://Wendy_COGS:f4p_CM6S@ds061621.mongolab.com:61621/mydb";
 
