@@ -102,6 +102,7 @@ passport.use(new FacebookStrategy({
          "access_token": accessToken
       }, function(err, user, created) {
 
+
          // created will be true here
          models.User.findOrCreate({}, function(err, user, created) {
 
