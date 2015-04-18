@@ -31,12 +31,12 @@ var INSTAGRAM_ACCESS_TOKEN = "";
 Instagram.set('client_id', INSTAGRAM_CLIENT_ID);
 Instagram.set('client_secret', INSTAGRAM_CLIENT_SECRET);
 
-var FACEBOOK_APP_ID = "1037035612991295";
-var FACEBOOK_APP_SECRET = "a7f5db616a09e29c1433eb0877e1c216";
+var FACEBOOK_APP_ID = "1492518170992676";
+var FACEBOOK_APP_SECRET = '50a28fba3f3012f061cf58004db24fa8';
 var conf = {
-   client_id: '1037035612991295',
+   client_id: FACEBOOK_APP_ID ,
 
-   client_secret: 'a7f5db616a09e29c1433eb0877e1c216',
+   client_secret: FACEBOOK_APP_SECRET ,
    scope: 'public_profile, user_friends,user_likes,user_status, user_posts,user_photos,user_about_me',
    redirect_uri: 'http://hanahappiness.herokuapp.com/auth/facebook/callback'
 };
@@ -88,8 +88,8 @@ passport.use(new InstagramStrategy({
 ));
 
 passport.use(new FacebookStrategy({
-      clientID: "1037035612991295",
-      clientSecret: "a7f5db616a09e29c1433eb0877e1c216",
+      clientID: "1492518170992676",
+      clientSecret: "50a28fba3f3012f061cf58004db24fa8",
       callbackURL: "http://hanahappiness.herokuapp.com/auth/facebook/callback"
    },
    function(accessToken, refreshToken, profile, done) {
@@ -338,7 +338,7 @@ app.get('/facebook', ensureAuthenticated, function(req, res) {
 
 
 app.get('/love', function(req, res) {
-   graph.setAccessToken('1037035612991295|Evyk6CopDTyeNmuey1VCGiWMnDc');
+   graph.setAccessToken('1492518170992676|OvEPZvrNsm08FKa8tvVcSTW8lY0');
    graph.get("search?q=beach+san_diego&type=page&center=32.7150,-117.1625&distance=50000&limit=100000", function(err, res2) {
 
          var location = [];

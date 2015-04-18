@@ -35,67 +35,7 @@ a.blueResponsive, .blueResponsive:hover{
     .buttonl:hover {
       background: #27ae60;
     }
-  
-.pulse2 {
-	-webkit-animation: pulse2 1s linear infinite;
-	-moz-animation: pulse2 1s linear infinite;
-	-ms-animation: pulse2 1s linear infinite;
-	animation: pulse2 1s linear infinite;
-}
 
-@keyframes "pulse2" {
- 0% {
-    -webkit-transform: scale(1.0);
-   	-moz-transform: scale(1.0);
-   	-o-transform: scale(1.0);
-   	-ms-transform: scale(1.0);
-   	transform: scale(1.0);
- }
- 50% {
-    -webkit-transform: scale(0.95);
-   	-moz-transform: scale(0.95);
-   	-o-transform: scale(0.95);
-   	-ms-transform: scale(0.95);
-   	transform: scale(0.95);
- }
-
-}
-
-@-moz-keyframes pulse2 {
- 0% {
-   -moz-transform: scale(1.0);
-   transform: scale(1.0);
- }
- 50% {
-   -moz-transform: scale(0.95);
-   transform: scale(0.95);
- }
-
-}
-
-@-webkit-keyframes "pulse2" {
- 0% {
-   -webkit-transform: scale(1.0);
-   transform: scale(1.0);
- }
- 50% {
-   -webkit-transform: scale(0.95);
-   transform: scale(0.95);
- }
-
-}
-
-@-ms-keyframes "pulse2" {
- 0% {
-   -ms-transform: scale(1.0);
-   transform: scale(1.0);
- }
- 50% {
-   -ms-transform: scale(0.95);
-   transform: scale(0.95);
- }
-
-}
 
 .center-div {
   text-align:center;
