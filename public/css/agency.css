@@ -229,8 +229,23 @@ fieldset[disabled] .btn-xl.active {
     color: #fff;
     background-color: #fec503;
 }
+@media (min-width:550px){
+
+ .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6,  .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,.col-sm-1,  .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-8, {
+    width: 50%;
+    display:inline-block;
+}
+}
+
+@media (min-width:768px){
+
+    .col-sm-6 {
+    width: 33.3333%;
+}
+}
 
 @media(min-width:768px) {
+
     .navbar-default {
         padding: 25px 0;
         border: 0;
@@ -259,6 +274,7 @@ fieldset[disabled] .btn-xl.active {
     .navbar-default.navbar-shrink .navbar-brand {
         font-size: 1.5em;
     }
+     .section{padding:100px 0;}
 }
 
 header {
@@ -296,6 +312,7 @@ header .intro-text .intro-heading {
 }
 
 @media(min-width:768px) {
+
     header .intro-text {
         padding-top: 300px;
         padding-bottom: 200px;
@@ -340,7 +357,7 @@ section h3.section-subheading {
 
 @media(min-width:768px) {
     section {
-        padding: 150px 0;
+        padding: 100px 0;
     }
 }
 
@@ -422,7 +439,7 @@ section h3.section-subheading {
 
 @media(min-width:767px) {
     #portfolio .portfolio-item {
-        margin: 0 0 30px;
+        margin: 0 0 20px;
     }
 }
 
@@ -577,6 +594,17 @@ section h3.section-subheading {
 }
 
 @media(min-width:992px) {
+    .aa{
+        margin-left:160px;
+        width:700px;
+        float:left;
+    }
+    ..bb{
+       width:400px; 
+    float:right;
+
+    }
+    .section{padding:100px 0;}
     .timeline>li {
         min-height: 150px;
     }

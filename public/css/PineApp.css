@@ -1,4 +1,41 @@
-﻿
+﻿#portfolio .portfolio-item .portfolio-caption {
+  background-color:black;
+  opacity:0.8;
+  padding:3px;
+
+
+}
+.text-muted{
+
+  color:#ffffff;
+
+}
+#portfolio .portfolio-item .portfolio-caption p{
+  font-size:10pt;}
+
+
+@media (max-width:767px){
+div.container.aa{
+    margin-left: 0px
+  }
+
+#portfolio .portfolio-item {
+  right: 0;
+  padding: 0px;
+}
+
+.col-lg-3, .col-lg-6, .col-md-3, .col-md-4, .col-md-6,  .col-sm-3, .col-sm-4, .col-sm-6 {
+  position: relative;
+  min-height: 1px;
+
+      width: 49%;
+    display:inline-block;
+}
+
+}
+
+
+
 .shadows:hover{
 opacity:0.8;
 
@@ -127,6 +164,7 @@ font-size:20px;
     -moz-column-count: 4;
     column-count: 4;
   }
+
 }
 @media (max-width: 800px) {
   #columns1 {
@@ -229,10 +267,10 @@ display: block;
 }
 
 a.c2 {
-background-image: url(https://download.unsplash.com/photo-1421091242698-34f6ad7fc088);
+background-image: url(/img/3.png);
 }
 a.c7 {
-background-image: url(/img/ocean.png);
+background-image: url(/img/2.png);
 }
 a.c10 {
 background-image: url(http://hana2.meteor.com/img/2.png);
@@ -519,6 +557,104 @@ color: #ffffff;
 
 
 
+
+
+
+/* STRUCTURE */
+
+
+
+/* STRUCTURE */
+
+#pagewrap {
+  padding: 5px;
+  width: 960px;
+  margin: 20px auto;
+}
+
+#content {
+  width: 290px;
+  float: left;
+  padding: 5px 15px;
+}
+
+#middle {
+  width: 294px; /* Account for margins + border values */
+  float: left;
+  padding: 5px 15px;
+  margin: 0px 5px 5px 5px;
+}
+
+#sidebar {
+  width: 270px;
+  padding: 5px 15px;
+  float: left;
+}
+
+
+/************************************************************************************
+MEDIA QUERIES
+*************************************************************************************/
+/* for 980px or less */
+@media screen and (max-width: 980px) {
+  
+  #pagewrap {
+    width: 94%;
+  }
+  #content {
+    width: 41%;
+    padding: 1% 4%;
+  }
+  #middle {
+    width: 41%;
+    padding: 1% 4%;
+    margin: 0px 0px 5px 5px;
+    float: right;
+  }
+  
+  #sidebar {
+    clear: both;
+    padding: 1% 4%;
+    width: auto;
+    float: none;
+  }
+
+  
+}
+
+/* for 700px or less */
+@media screen and (max-width: 600px) {
+
+  #content {
+    width: auto;
+    float: none;
+  }
+  
+  #middle {
+    width: auto;
+    float: none;
+    margin-left: 0px;
+  }
+  
+  #sidebar {
+    width: auto;
+    float: none;
+  }
+
+}
+
+/* for 480px or less */
+@media screen and (max-width: 480px) {
+
+
+  h1 {
+    font-size: 2em;
+  }
+  #sidebar {
+    display: none;
+  }
+
+}
 
 
 

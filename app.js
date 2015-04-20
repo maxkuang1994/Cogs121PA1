@@ -17,6 +17,7 @@ var mongoose = require('mongoose');
 var app = express();
 var brokenMusicLink ='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/417197_10149999285992991_711134825_n.png?oh=5f504d85a96f2380b2e321d724d15511&oe=55DC0D22&__gda__=1435991238_9b0901b9ebd35182a3dccd793d453e0b';
 //local dependencies
+var brokenLink2='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/418333_10149999285994467_1920585607_n.png?oh=7d32e7fdad9c6cf1b0333b05245feb91&oe=55D6492D&__gda__=1439872202_649eda5738ff370b407d330b2a5fbec2';
 var models = require('./models');
 
 //client id and client secret here, taken from .env
@@ -164,7 +165,7 @@ app.get('/login', function(req, res) {
    Instagram.media.popular({
       complete: function(data) {
          //Map will iterate through the returned data obj
-         onepicture = data[0].images.low_resolution.url;
+         onepicture= data[0].images.low_resolution.url;
          renderReturn(onepicture);
          return;
       }
@@ -360,7 +361,7 @@ var i3=0;
                   var locationPicurl;
 var a ="false";
 
-           if ((res3.picture.data.width >= 400)&&(res3.picture.data.url!=brokenMusicLink)&&(res3.picture.data.url!='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/418333_10149999285994467_1920585607_n.png?oh=7d32e7fdad9c6cf1b0333b05245feb91&oe=55D6492D&__gda__=1437280202_44cc3d9bbdc89cc4cc03a2ba3548da54')&&(res3.picture.data.url!='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/v/t1.0-1/580798_10149999285995853_2130804811_n.png?oh=9d7c86b0f9b8d44f5140c79d8aa42b58&oe=5598A65F&__gda__=1436073212_5d1ecfb4933036d57c1f4e9a36983d60')&&(res3.picture.data.url != 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/418333_10149999285994467_1920585607_n.png?oh=56f79c7d99c8953b1d3d458b592706d6&oe=55AEBC2D&__gda__=1437280202_85508750ff88cded83a455f528cf0a18'))
+           if ((res3.picture.data.width >= 400)&&(res3.picture.data.url!=brokenMusicLink)&&(res3.picture.data.url!=brokenLink2)&&(res3.picture.data.url!='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/418333_10149999285994467_1920585607_n.png?oh=7d32e7fdad9c6cf1b0333b05245feb91&oe=55D6492D&__gda__=1437280202_44cc3d9bbdc89cc4cc03a2ba3548da54')&&(res3.picture.data.url!='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/v/t1.0-1/580798_10149999285995853_2130804811_n.png?oh=9d7c86b0f9b8d44f5140c79d8aa42b58&oe=5598A65F&__gda__=1436073212_5d1ecfb4933036d57c1f4e9a36983d60')&&(res3.picture.data.url != 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/418333_10149999285994467_1920585607_n.png?oh=56f79c7d99c8953b1d3d458b592706d6&oe=55AEBC2D&__gda__=1437280202_85508750ff88cded83a455f528cf0a18'))
                      {
                      locationPicurl = res3.picture.data.url;
                  i3++;
@@ -462,7 +463,7 @@ app.get('/instagram', ensureAuthenticated, function(req, res) {
                var imageArr = data.map(function(item) {
                   //create temporary json object
                   tempJSON = [];
-                  tempJSON.url2 = item.images.low_resolution.url;
+                  tempJSON.url2 = item.images.high_resolution.url;
                   if(item.caption!=null)
                   tempJSON.pp = item.caption.text;
                   else
