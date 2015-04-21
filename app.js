@@ -160,13 +160,25 @@ app.get('/', function(req, res) {
 
 
 app.get('/login', function(req, res) {
+     graph.setAccessToken('1492518170992676|OvEPZvrNsm08FKa8tvVcSTW8lY0');
    var onepicture = "";
 
+   var FB = []; 
+  graph.get("/onehanachallenge/feed?fields=full_picture,message", function (err, fbdata) {
+    
+     FB.url = fbdata.data[0].full_picture;
+     FB.FBDescription = fbdata.data[0].message;
+
+      }
+      );
+       // console.log("we know that a is "+a);
+ 
    Instagram.media.popular({
       complete: function(data) {
          //Map will iterate through the returned data obj
          onepicture= data[0].images.low_resolution.url;
          renderReturn(onepicture);
+         
          return;
       }
    })
@@ -175,12 +187,15 @@ app.get('/login', function(req, res) {
       if (req.user == null)
          return res.render('login', {
             user: req.user,
-            onepicture: onepicture
+            onepicture: onepicture,
+            FB:FB
          });
+
       if (req.user.provider == 'instagram' && (req.user != null)) {
          var query = models.User.where({
             name: req.user.username
          });
+
          query.findOne(function(err, user) {
             if (err) return handleError(err);
             if (user) {
@@ -194,7 +209,8 @@ app.get('/login', function(req, res) {
                      res.render('login', {
                         user: req.user,
                         user_profilePicture: user_profilePicture,
-                        onepicture: onepicture
+                        onepicture: onepicture,
+                        FB:FB
                      });
                   }
                });
@@ -207,7 +223,8 @@ app.get('/login', function(req, res) {
             res.render('login', {
                user: req.user,
                user_profilePicture: res2.picture.data.url,
-               onepicture: onepicture
+               onepicture: onepicture,
+               FB:FB
             });
          });
       }

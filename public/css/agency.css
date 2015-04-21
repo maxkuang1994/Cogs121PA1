@@ -239,9 +239,6 @@ fieldset[disabled] .btn-xl.active {
 
 @media (min-width:768px){
 
-    .col-sm-6 {
-    width: 33.3333%;
-}
 }
 
 @media(min-width:768px) {
@@ -595,7 +592,7 @@ section h3.section-subheading {
 
 @media(min-width:992px) {
     .aa{
-        margin-left:160px;
+        margin-left:260px;
         width:700px;
         float:left;
     }
