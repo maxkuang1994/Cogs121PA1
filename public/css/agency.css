@@ -592,8 +592,8 @@ section h3.section-subheading {
 
 @media(min-width:992px) {
     .aa{
-        margin-left:260px;
-        width:700px;
+        margin-left:120px;
+        width:600px;
         float:left;
     }
     ..bb{
