@@ -4,6 +4,8 @@ var express = require('express');
 var passport = require('passport');
 var InstagramStrategy = require('passport-instagram').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy; //ADDED
+var NYT = require('nyt');
+
 var http = require('http');
 var path = require('path');
 var handlebars = require('express-handlebars');
@@ -15,6 +17,13 @@ var Instagram = require('instagram-node-lib');
 var graph = require('fbgraph');
 var mongoose = require('mongoose');
 var app = express();
+var keys = {
+            'article-search':'d21016efef5d169d28e141ab68e7f7cf:5:71879521',
+            'most-popular':'b08bcaa7d0363523e7c5583b4e265b6a:18:71879521',
+            }
+
+var nyt = new NYT(keys);
+
 var brokenMusicLink ='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/417197_10149999285992991_711134825_n.png?oh=5f504d85a96f2380b2e321d724d15511&oe=55DC0D22&__gda__=1435991238_9b0901b9ebd35182a3dccd793d453e0b';
 //local dependencies
 var brokenLink2='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/418333_10149999285994467_1920585607_n.png?oh=7d32e7fdad9c6cf1b0333b05245feb91&oe=55D6492D&__gda__=1439872202_649eda5738ff370b407d330b2a5fbec2';
@@ -160,6 +169,36 @@ app.get('/', function(req, res) {
 
 
 app.get('/login', function(req, res) {
+
+//nyt.article.search({'query':'bill gates'}, console.log); 
+var healthnews=[];
+
+nyt.mostPopular.shared({'section':'health', 'time-period':'7'}, function(data) {
+           //       console.log("the section is "+data);
+                  var data2=JSON.parse(data).results;
+             //    console.log("the length is "+ data2.results);
+               //    console.log(data2[0].media);
+              //   console.log(data2[0].media[0]['media-metadata']);
+                   console.log(data2[0].media[0]['media-metadata'][0].url);
+         healthnews = data2.map(function(item) {
+            //create temporary json object
+            tempNEWS = [];
+
+            tempNEWS.url = item.url;
+               tempNEWS.title = item.title;
+               tempNEWS.abstract = item.abstract;
+               if(item.media.length>=1 && (item.media[0]['media-metadata'][0].url !=null)){
+                 tempNEWS.image = item.media[0]['media-metadata'][0].url;
+              // console.log(item.media[0]['media-metadata'][0].url);
+              }
+               else
+                tempNEWS.image=null;
+            return tempNEWS;
+
+         });
+     console.log(healthnews);
+  });
+
      graph.setAccessToken('1492518170992676|OvEPZvrNsm08FKa8tvVcSTW8lY0');
    var onepicture = "";
 
@@ -168,10 +207,9 @@ app.get('/login', function(req, res) {
     
      FB.url = fbdata.data[0].full_picture;
      FB.FBDescription = fbdata.data[0].message;
-
       }
       );
-       // console.log("we know that a is "+a);
+       
  
    Instagram.media.popular({
       complete: function(data) {
@@ -188,7 +226,8 @@ app.get('/login', function(req, res) {
          return res.render('login', {
             user: req.user,
             onepicture: onepicture,
-            FB:FB
+            FB:FB,
+   healthnews:healthnews
          });
 
       if (req.user.provider == 'instagram' && (req.user != null)) {
@@ -210,7 +249,8 @@ app.get('/login', function(req, res) {
                         user: req.user,
                         user_profilePicture: user_profilePicture,
                         onepicture: onepicture,
-                        FB:FB
+                        FB:FB,
+                        healthnews:healthnews
                      });
                   }
                });
@@ -224,7 +264,8 @@ app.get('/login', function(req, res) {
                user: req.user,
                user_profilePicture: res2.picture.data.url,
                onepicture: onepicture,
-               FB:FB
+               FB:FB,
+               healthnews:healthnews
             });
          });
       }
@@ -249,7 +290,8 @@ app.get('/account', ensureAuthenticated, function(req, res) {
                   res.render('account', {
                      user: req.user,
                      user_profilePicture: user_profilePicture,
-                     firstName: firstName
+                     firstName: firstName,
+                     healthnews:healthnews
                   });
                }
             });

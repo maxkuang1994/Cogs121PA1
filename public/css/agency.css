@@ -1,8 +1,67 @@
-﻿/*!
+﻿.headlines a p, .sect-related-links a p, .saved-arts a p {
+  color: #606060;
+  font-weight: normal;
+  font-size: 1.3em;
+  line-height: 1.4em;
+}
+.headlines p, .sect-related-links p, .saved-arts p {
+  font-size: 1.2em;
+  line-height: 1.42em;
+  margin: 4px 0 5px;
+}
+p {
+  display: block;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+}
+img {
+  vertical-align: middle;
+}
+img {
+  border: 0;
+}
+.custom-fonts .headlines li.highlighted .title, .custom-fonts .sect-related-links li.highlighted .title, .custom-fonts .saved-arts li.highlighted .title, .custom-fonts .headlines li.highlighted .ikicker, .custom-fonts .sect-related-links li.highlighted .ikicker, .custom-fonts .saved-arts li.highlighted .ikicker {
+  font-family: "nyt-cheltenham",Georgia,serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2.0em;
+  line-height: 1.15em;
+}
+
+.headlines .highlighted .highlighted-thumb, .sect-related-links .highlighted .highlighted-thumb, .saved-arts .highlighted .highlighted-thumb {
+  display: block;
+  float: right;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-top: 3px;
+}.headlines .highlighted-thumb {
+  width: 75px;
+  height: 75px;
+}.headlines li:last-child, .sect-related-links li:last-child, .saved-arts li:last-child {
+  border-bottom: 0;
+}
+.headlines li, .sect-related-links li, .saved-arts li {
+  padding: 0;
+  padding-top: 4px;
+  padding-bottom: 3px;
+  clear: both;
+  font-family: Georgia,serif;
+}
+.headlines>li, .sect-related-links>li, .saved-arts>li {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+/*!
  * Start Bootstrap - Agency Bootstrap Theme (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
+
+
+
+
 
 body {
     overflow-x: hidden;
@@ -591,6 +650,7 @@ section h3.section-subheading {
 }
 
 @media(min-width:992px) {
+    .news{width:800px;}
     .aa{
         margin-left:120px;
         width:600px;
@@ -628,6 +688,7 @@ section h3.section-subheading {
 }
 
 @media(min-width:1200px) {
+      .news{width:900px;}
     .timeline>li {
         min-height: 170px;
     }

@@ -40,7 +40,7 @@
          </div>
       </article>
    </section>
-   
+
 </div>
 
 
@@ -104,114 +104,26 @@
 
 
 
+<div class="container news">
+ <p style="border-left: solid 5px #057FF5;font-size:20px;
+  font-style: italic;
+  line-height: 40px;color:#ccc;padding-left:30px;font-weight: 700;">Today's Health News  <a href="https://www.facebook.com/onehanachallenge" style="color:#14934A;font-size:15px;">/more</a></p>
+
+<div>
+
+<ol data-view="results" class="headlines touchstates hp">
+     {{#each healthnews}}
+     {{#if image}}
+<li class="border-b highlighted  item-0"><a href="{{url}}">
+  <img src={{image}} class="highlighted-thumb" onError="this.onerror=null;this.src='http://echurchdepot.zurltd.netdna-cdn.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/7/3/739260007138L_3.jpg'" width="150" height="150">
+  <span class="title">New Genetic Tests for Breast Cancer Hold Promise</span>
+  <p>{{abstract}}</p>
+  </a>
+  </li>{{/if}}
+  {{/each}}
+</ol>
+
+</div>
 
 
-
-     <!-- Portfolio Modal 1 -->
-     <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row borderLeft">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <!-- Project Details Go Here -->
-                            <h2 >Starting the Green Journey</h2>
-                            <p class="item-intro text-muted"> </p>
-                            <img class="img-responsive" src="https://download.unsplash.com/photo-1421091242698-34f6ad7fc088" alt="">
-                            <p class="textSizeTwenty">Eat a salad today to complete this challenge!</p>
-                            <p class="textSizeTwenty">
-                               
-                             </p>
-                            <ul class="list-inline">
-                                <li>Date: Feb 2015</li>
-                                <li>By: Max </li>
-                                <li><mark>Category</mark>: Health</li>
-                            </ul>
-                            <button type="button" class="btn btn-warning paddingMore" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                            
-                            <div class="fb-share-button paddingMore btn" data-href="http://hana4.meteor.com/addChallenge" data-layout="button_count">
-                            </div>
-
-                            <button type="button" class="btn btn-success paddingMore" onclick="addPost('http://hana4.meteor.com/img/1.png','Ate a Salad!','It\'s February. I have often heard that it\'s difficult to maintain a heathy lifestyle. Spring is the best time to start your health journey. Eat Green, be healthier.','health')"><i class="fa fa-times"></i> Complete this challenge! </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal 2 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row borderLeft">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>A Warm Hug</h2>
-                            <p class="item-intro text-muted"> </p>
-                            <img class="img-responsive img-centered" src="img/2.png" alt="">
-                            <p class="textSizeTwenty"> Hug someone today! A small positive thought in the morning with your partner can change the whole day.
-                            </p>
-                                    <ul class="list-inline">
-                                <li>Date: Feb 2015</li>
-                                <li>By: Alex</li>
-                                <li><mark>Category</mark>: Relationships</li>
-                            </ul>
-
-                            <button type="button" class="btn btn-warning paddingMore" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                            <button type="button" class="btn btn-success paddingMore" onclick="addPost('http://hana4.meteor.com/img/2.png','Hugged my best friend','A small positive thought in the morning with your partner can change the whole day. There are so many tips for us to learn for cultivating relationships. Let\'s try this one: drive and enjoy today\'s sunrise.','Relationships')"><i class="fa fa-times"></i> Complete this challenge! </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal 3 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row borderLeft">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <!-- Project Details Go Here -->
-                            <h2>NEVER GIVEUP</h2>
-                            <p class="item-intro text-muted"> </p>
-                            <img class="img-responsive img-centered" src="img/3.png" alt="">
-                            <p class="textSizeTwenty"> Organize your desk! <br> Have you ever paused long enough to ask yourself how you could benefit from being better organized?” There are many benefits for being well organized and I have selected three (3) major benefits to share with you:<br><br> 
-                            Benefit #1: you will be able to be more focused on what you want to achieve.<br>Benefit #2: you will be able to be more productive and do better on your midterms. <br>Benefit #3: you will be able to reduce the clutter in your workspace and reduce your stress levels.
-                            </p>
-                                    <ul class="list-inline">
-                                <li>Date: Feb 2015</li>
-                                <li>By: Daniel</li>
-                                <li><mark>Category</mark>: Aspirations</li>
-                            </ul>
-                            <button type="button" class="btn btn-warning paddingMore" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                            <button type="button" class="btn btn-success paddingMore" onclick="addPost('http://hana4.meteor.com/img/3.png','Organized my desk!','Have you ever paused long enough to ask yourself how you could benefit from being better organized? There are many benefits for being well organized and I have selected three major benefits to share with you. Benefit #1: you will be able to be more focused on what you want to achieve. Benefit #2: you will be able to be more productive and do better on your midterms. Benefit #3: you will be able to reduce the clutter in your workspace and reduce your stress levels.','Aspirations')"><i class="fa fa-times"></i> Complete this challenge! </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-   
-
+</div>
