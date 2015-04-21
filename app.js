@@ -480,7 +480,7 @@ app.get('/instagram', ensureAuthenticated, function(req, res) {
                var imageArr = data.map(function(item) {
                   //create temporary json object
                   tempJSON = [];
-                  tempJSON.url2 = item.images.high_resolution.url;
+                  tempJSON.url2 = item.images.standard_resolution.url;
                   if(item.caption!=null)
                   tempJSON.pp = item.caption.text;
                   else
